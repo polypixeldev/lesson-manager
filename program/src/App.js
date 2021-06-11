@@ -8,6 +8,7 @@ import Home from './components/home.js';
 function App() {
   return (
     <div className="App">
+      <title>Lesson Manager v1.0.0</title>
       <header>
         <Link to="/" id="title">
           <h1>Lesson Manager</h1>

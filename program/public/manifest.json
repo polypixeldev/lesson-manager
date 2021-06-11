@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Lesson Manager",
+  "name": "Lesson Manager v1.0.0",
   "icons": [
     {
       "src": "favicon.ico",

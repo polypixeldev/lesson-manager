@@ -7,6 +7,7 @@ import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
+  <title>Lesson Manager v1.0.0</title>
     <App />
   </BrowserRouter>,
   document.getElementById('root')
