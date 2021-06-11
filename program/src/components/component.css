@@ -1,0 +1,21 @@
+#sub-nav {
+	background-color: #373b42;
+	padding-top: 2vh;
+	padding-bottom: 2vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	background-color: #4b4e53;
+	height: 90vh;
+}
+
+.sub-nav-link {
+	text-decoration: none;
+	color: #FFFFFF;
+	margin-right: 1.5vw;
+	margin-left: 1.5vw;
+}
+
