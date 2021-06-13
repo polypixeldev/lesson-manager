@@ -1,0 +1,17 @@
+[
+	{
+		"standard_id": "standard_name"
+	},
+	{
+		"activity_id": {
+			"name": "activity_name",
+			"notes": "activity_notes",
+			"standards": ["standard_id"]
+		}
+	},
+	{
+		"unit_number": {
+			"week_number": ["activity_id"]
+		}
+	}
+]

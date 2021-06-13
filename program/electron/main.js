@@ -6,8 +6,8 @@ let mainWindow;
  
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width:800,
-        height:600,
+        width:700,
+        height:500,
         show: false
     });
     const startURL = isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`;
@@ -18,5 +18,7 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
+
+	mainWindow.setMenuBarVisibility(false);
 }
 app.on('ready', createWindow);

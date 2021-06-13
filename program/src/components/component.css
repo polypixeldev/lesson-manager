@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 #sub-nav {
 	background-color: #373b42;
 	padding-top: 2vh;
@@ -17,5 +18,52 @@ main {
 	color: #FFFFFF;
 	margin-right: 1.5vw;
 	margin-left: 1.5vw;
+}
+
+#get-started{
+	font-family: 'Oswald', 'sans-serif';
+	font-size: 40px;
+	margin: 20px 0px 20px 0px;
+}
+
+hr {
+	margin-right: 5vw;
+	margin-left: 5vw;
+	border-color: #000;
+	background-color: #000;
+}
+
+#starter-text {
+	margin-right: 7.5vw;
+	margin-left: 7.5vw;
+	font-size : 25px;
+	font-family: 'Comfortaa', sans-serif;
+	color: white;
+	text-decoration: none;
+}
+
+#newStandard {
+	margin-top: 20px;
+}
+
+label {
+	font-family: 'Oswald', sans-serif;
+	font-size: 20px;
+}
+
+#submit {
+	font-size: 17.5px;
+	font-family: 'Oswald', sans-serif;
+}
+
+#newTitle {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	margin-bottom: 0px;
+}
+
+h2 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
 }
 
