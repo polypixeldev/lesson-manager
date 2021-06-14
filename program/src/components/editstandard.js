@@ -5,10 +5,10 @@ class EditStandard extends Component {
 	render(){
 		return(
 			<main>
-				<h2 id="Title">Edit Activity: </h2>
+				<h2 id="Title">Edit Standard: </h2>
 				<form id="newStandard">
-					<label for="choose-activity" id="choose-activity-label">Choose a standard:</label><br/>
-					<select name="choose-activity" id="choose-activity">
+					<label for="choose-standard" id="choose-standard-label">Choose a standard:</label><br/>
+					<select name="choose-standard" id="choose-standard">
 
 					</select>
 					<br/><br/>
