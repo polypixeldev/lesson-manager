@@ -35,7 +35,7 @@ class App extends Component{
     return (
       <div className="App">
         <title>Lesson Manager v1.0.0</title>
-        <header>
+        <header id="main-nav">
           <Link to="/" id="title">
             <h1>Lesson Manager</h1>
             <p id="v">v1.0.0</p>
@@ -58,7 +58,7 @@ class App extends Component{
             <Units dataObj={this.state.dataObj}/>
           </Route>
           <Route path="/help" component={Help}/>
-          <Route exact path='/'>
+          <Route path='/'>
             <Home dataObj={this.state.dataObj}/>
           </Route>
         </Switch>

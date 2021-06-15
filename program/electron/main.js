@@ -39,3 +39,19 @@ Electron.ipcMain.on('test', (ev, arg) => {
 Electron.ipcMain.on('data', (ev, arg) => {
     ev.returnValue = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
 });
+
+Electron.ipcMain.on('new-standard', (ev, arg) => {
+    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    dataObj[0][arg[0]] = arg[1];
+    console.log(dataObj);
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('new standard added');
+});
+
+Electron.ipcMain.on('edit-standard', (ev, arg) => {
+    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    delete dataObj[0][arg[0]];
+    dataObj[0][arg[1][0]] = arg[1][1];
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('standard edited');
+});

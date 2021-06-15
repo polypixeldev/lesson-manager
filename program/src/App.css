@@ -43,3 +43,7 @@ h1 {
   height: 5%;
 }
 
+#main-nav {
+  position: sticky;
+  top: 0px;
+}

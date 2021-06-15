@@ -20,7 +20,9 @@ class Standards extends Component {
 				</nav>
 				<Switch>
 					<Route path="/standards/new" component={NewStandard}/>
-					<Route path="/standards/edit" component={EditStandard}/>
+					<Route path="/standards/edit">
+						<EditStandard dataObj={this.props.dataObj}/>
+					</Route>
 					<Route path="/standards/delete" component={DeleteStandard}/>
 					<Route exact path="/standards/list">
 						<StandardList dataObj={this.props.dataObj}/>
