@@ -30,13 +30,14 @@ class EditStandard extends Component {
 	}
 
 	handleSubmit(event){
+		event.preventDefault();
 		window.api.send('edit-standard', [this.state.selected, [this.state.desc, this.state.id]]);
 		this.setState({
 			desc: '',
 			id: '',
 			selected: ''
 		});
-		event.preventDefault();
+		this.props.refreshData();
 	}
 
 	render(){

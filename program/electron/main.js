@@ -54,4 +54,5 @@ Electron.ipcMain.on('edit-standard', (ev, arg) => {
     dataObj[0][arg[1][1]] = arg[1][0];
     fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('standard edited');
+    ev.returnValue = 'done';
 });

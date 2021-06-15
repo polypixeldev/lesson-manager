@@ -24,9 +24,14 @@ class App extends Component{
         }
       ]
     }
+    this.refreshData = this.refreshData.bind(this);
   }
 
   componentDidMount(){
+    this.refreshData();
+  }
+
+  refreshData(){
     console.log('h');
     this.setState({dataObj: window.api.sendSync('data', '')});
   }
@@ -49,7 +54,7 @@ class App extends Component{
         </header>
         <Switch>
           <Route path="/standards">
-            <Standards dataObj={this.state.dataObj}/>
+            <Standards dataObj={this.state.dataObj} refreshData={this.refreshData} />
           </Route>
           <Route path='/activities'>
             <Activities dataObj={this.state.dataObj}/>
