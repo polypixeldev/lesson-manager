@@ -5,10 +5,12 @@ class EditStandard extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			desc: '',
-			id: '',
+			desc: null,
+			id: null,
 			selected: null
 		}
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	getStandards(){
@@ -18,14 +20,20 @@ class EditStandard extends Component {
 	}
 
 	handleChange(event){
-
+		const target = event.target;
+		const value = target.value;
+		const name = target.name;
+		console.log(value);
+		this.setState({
+			[name]: value
+		});
 	}
 
 	handleSubmit(event){
 		window.api.send('edit-standard', [this.state.selected, [this.state.desc, this.state.id]]);
 		this.setState({
 			desc: '',
-			name: '',
+			id: '',
 			selected: ''
 		});
 		event.preventDefault();
@@ -37,12 +45,12 @@ class EditStandard extends Component {
 				<h2 id="Title">Edit Standard: </h2>
 				<form id="newStandard" onSubmit={this.handleSubmit}>
 					<label for="choose-standard" id="choose-standard-label">Choose a standard:</label><br/>
-					<select name="choose-standard" id="choose-standard" value={this.state.selected} onChange={this.handleChange}>
-						{this.getStandards}
+					<select name="selected" id="choose-standard" value={this.state.selected} onChange={this.handleChange}>
+						{this.getStandards()}
 					</select>
 					<br/><br/>
 					<label for="name" id="name-label">Standard Description:</label><br/>
-					<input type="text" id="name" name="name" value={this.state.desc} onChange={this.handleChange}/>
+					<input type="text" id="name" name="desc" value={this.state.desc} onChange={this.handleChange}/>
 					<br/><br/>
 					<label for="id" id="id-label">Standard ID:</label><br/>
 					<input type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange} />
