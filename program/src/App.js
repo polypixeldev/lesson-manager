@@ -7,7 +7,6 @@ import Units from './components/units.js';
 import Home from './components/home.js';
 import helpicon from './helpicon.png'
 import Help from './components/help.js';
-import * as axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -29,11 +28,7 @@ class App extends Component{
 
   componentDidMount(){
     console.log('h');
-    window.api.send('test', 'from app.js');
-    axios.get('http://localhost:8050/get', response => {
-      console.log(response)
-      this.setState({dataObj: response});
-    });
+    this.setState({dataObj: window.api.sendSync('data', '')});
   }
 
   render(){

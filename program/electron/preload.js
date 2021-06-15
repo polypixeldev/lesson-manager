@@ -9,6 +9,9 @@ contextBridge.exposeInMainWorld(
                 ipcRenderer.send(channel, data);
             }
         },
+        sendSync: (channel, data) => {
+            return ipcRenderer.sendSync(channel, data);
+        },
         receive: (channel, func) => {
             let validChannels = ["test"];
             if (validChannels.includes(channel)) {

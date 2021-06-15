@@ -1,15 +1,7 @@
 const Electron = require('electron');
 //const isDev = require('electron-is-dev');   
 //const path = require('path');
-const Express = require('express');
 const fs = require('fs');
-const cors = require('cors');
-const app = Express();
-
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
  
 let mainWindow;
  
@@ -40,19 +32,10 @@ function createWindow() {
 }
 Electron.app.on('ready', createWindow);
 
-Electron.ipcMain.on('test', (ev, arg)=>{
+Electron.ipcMain.on('test', (ev, arg) => {
     console.log('recieved!');
 });
 
-
-app.get('/get', cors(corsOptions), (req, res) => {
-    res.sendFile(__dirname + '/dbs.json');
-});
-
-app.post('/update', (req, res) => {
-    
-});
-
-app.listen(8050, () => {
-
+Electron.ipcMain.on('data', (ev, arg) => {
+    ev.returnValue = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
 });
