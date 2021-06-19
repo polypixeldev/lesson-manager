@@ -30,6 +30,7 @@ class NewStandard extends Component {
 			desc: '',
 			id: ''
 		});
+		this.props.refreshData();
 		event.preventDefault();
 	}
 

@@ -4,6 +4,8 @@ import { NavLink, Switch, Route} from 'react-router-dom';
 import NewActivity from './newactivity.js';
 import EditActivity from './editactivity.js';
 import DeleteActivity from './deleteactivity.js';
+import ActivityList from './activitylist.js';
+import Activity from './activity.js';
 
 import './component.css';
 
@@ -19,15 +21,15 @@ class Activities extends Component {
 				</nav>
 
 				<Switch>
-					<Route path="/activities/new" component={NewActivity}/>
-					<Route path="/activities/edit" component={EditActivity}/>
-					<Route path="/activities/delete" component={DeleteActivity}/>
+					<Route path="/activities/new" render={(props) => 
+						<NewActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>
+					}/>
+					<Route path="/activities/edit" render={(props) => <EditActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
+					<Route path="/activities/delete" render={(props) => <DeleteActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
 					<Route path="/activities/list">
-						<h2>Activity List</h2>
-						<ul>
-
-						</ul>
+						<ActivityList dataObj={this.props.dataObj}/>
 					</Route>
+					<Route path="/activities/:id" render={(props) => <Activity {...props} dataObj={this.props.dataObj}/>}/>
 				</Switch>
 			</main>
 		)

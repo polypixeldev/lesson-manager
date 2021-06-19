@@ -57,10 +57,10 @@ class App extends Component{
             <Standards dataObj={this.state.dataObj} refreshData={this.refreshData} />
           </Route>
           <Route path='/activities'>
-            <Activities dataObj={this.state.dataObj}/>
+            <Activities dataObj={this.state.dataObj} refreshData={this.refreshData} />
           </Route>
           <Route path='/units'>
-            <Units dataObj={this.state.dataObj}/>
+            <Units dataObj={this.state.dataObj} refreshData={this.refreshData} />
           </Route>
           <Route path="/help" component={Help}/>
           <Route path='/'>

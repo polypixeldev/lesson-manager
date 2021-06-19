@@ -75,8 +75,33 @@ thead {
 
 tbody {
 	display: table-row-group;
-	text-align: left;
+	text-align: center;
 	margin: 0px 0px 0px 0px;
 }
 
+ul {
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+
+#btm-link {
+	margin-bottom: 20px;
+}
+
+.link {
+	color: black;
+	text-decoration: none;
+}
+
+#item {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	background-color: red;
+}
 

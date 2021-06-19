@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
+import StandardSelector from './standardselector.js';
 import './component.css';
 
 class EditStandard extends Component {
@@ -7,16 +9,11 @@ class EditStandard extends Component {
 		this.state = {
 			desc: null,
 			id: null,
-			selected: null
+			standard: ""
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
-
-	getStandards(){
-		return Object.entries(this.props.dataObj[0]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
-		});
+		this.getSelectedStandard = this.getSelectedStandard.bind(this);
 	}
 
 	handleChange(event){
@@ -40,15 +37,41 @@ class EditStandard extends Component {
 		this.props.refreshData();
 	}
 
+	componentDidMount(){
+		if(this.props.match.params.id !== 'null'){
+			this.setState({
+				desc: this.props.dataObj[0][this.props.match.params.id],
+				id: this.props.match.params.id,
+				selected: this.props.match.params.id
+			});
+		}
+	}
+	
+	getSelectedStandard(id){
+		let oldStandard = this.state.standard;
+		if(oldStandard === null){
+			oldStandard = "";
+		}
+		oldStandard = id;
+		this.setState({
+			standard: oldStandard
+		});
+		console.log(this.state.standard);
+	}
+
 	render(){
 		return(
+		<Switch>
+		<Route path="/standards/edit/selectstandard" render={(props) => 
+			<StandardSelector from="editstandard" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
+		}/>
+		<Route path="/standard/edit">
+		
 			<main>
 				<h2 id="Title">Edit Standard: </h2>
 				<form id="newStandard" onSubmit={this.handleSubmit}>
-					<label for="choose-standard" id="choose-standard-label">Choose a standard:</label><br/>
-					<select name="selected" id="choose-standard" value={this.state.selected} onChange={this.handleChange}>
-						{this.getStandards()}
-					</select>
+					<Link to="/standards/edit/selectstandard">Select a Standard</Link><br/>
+					<p>Selected Standard: </p>
 					<br/><br/>
 					<label for="name" id="name-label">Standard Description:</label><br/>
 					<input type="text" id="name" name="desc" value={this.state.desc} onChange={this.handleChange}/>
@@ -59,6 +82,8 @@ class EditStandard extends Component {
 					<input type="submit" id="submit"/>
 				</form>
 			</main>
+			</Route>
+			</Switch>
 		)
 	}
 }

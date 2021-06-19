@@ -56,3 +56,43 @@ Electron.ipcMain.on('edit-standard', (ev, arg) => {
     console.log('standard edited');
     ev.returnValue = 'done';
 });
+
+Electron.ipcMain.on('delete-standard', (ev, arg) => {
+    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    delete dataObj[0][arg];
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('standard deleted');
+});
+
+Electron.ipcMain.on('edit-activity', (ev, arg) => {
+    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    console.log(arg);
+    delete dataObj[1][arg.activity];
+    for(let field in arg){
+        if(field === null){
+            return;
+        }
+    }
+    dataObj[1][arg.id] = {
+        name: arg.name,
+        notes: arg.notes,
+        unit: arg.unit,
+        standards: arg.standards
+    }
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('activity edited');
+    ev.returnValue = 'done';
+});
+
+Electron.ipcMain.on('new-activity', (ev, arg) => {
+    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    dataObj[1][arg.id] = {
+        name: arg.name,
+        notes: arg.notes,
+        unit: arg.unit,
+        standards: arg.standards
+    }
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('activity created');
+    ev.returnValue = 'done';
+});
