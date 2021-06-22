@@ -15,7 +15,7 @@ class DeleteActivity extends Component {
 
 	getActivities(){
 		return Object.entries(this.props.dataObj[1]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
+			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].name}</option>
 		});
 	}
 
@@ -50,6 +50,7 @@ class DeleteActivity extends Component {
 				<form onSubmit={this.handleSubmit}>
 					<label for="select-activity" id="select-activity-label">Select Activity:</label><br/>
 					<select id="select-activity" name="selected" value={this.state.selected} onChange={this.handleChange}>
+						<option value="">Select an Activity</option>
 						{this.getActivities()}
 					</select>
 					<br/><br/>

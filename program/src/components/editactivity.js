@@ -25,7 +25,7 @@ class EditActivity extends Component {
 
 	getActivities(){
 		return Object.entries(this.props.dataObj[1]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
+			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].name}</option>
 		});
 	}
 
@@ -50,14 +50,20 @@ class EditActivity extends Component {
 
 	handleSubmit(event){
 		event.preventDefault()
-		window.api.sendSync('edit-activity', {
-			activity: this.state.selected,
+		let res = window.api.sendSync('edit-activity', {
+			activity: this.state.activity,
 			name: this.state.name,
 			id: this.state.id,
 			notes: this.state.notes,
 			unit: this.state.unit,
 			standards: this.state.standards
 		});
+		if(res === 'fail-activity'){
+			return alert('Please select an activity to edit');
+		}
+		if(res === 'fail-unit'){
+			return alert('Please specify a unit for the activity');
+		}
 		this.props.refreshData();
 	}
 
@@ -83,6 +89,20 @@ class EditActivity extends Component {
 		
 	}
 
+	componentDidMount(){
+		console.log(this.props.match.params.id);
+		if(this.props.match.params.id !== 'null'){
+			this.setState({
+				activity: this.props.match.params.id,
+				name: this.props.dataObj[1][this.props.match.params.id].name,
+				id: this.props.match.params.id,
+				notes: this.props.dataObj[1][this.props.match.params.id].notes,
+				unit: this.props.dataObj[1][this.props.match.params.id].unit,
+				standards: this.props.dataObj[1][this.props.match.params.id].standards
+			});
+		}
+	}
+
 	render(){
 		return(
 			<Switch>
@@ -94,22 +114,22 @@ class EditActivity extends Component {
 						<h2 id="Title">Edit Activity: </h2>
 							<form onSubmit={this.handleSubmit} id="editActivity">
 								<label for="choose-activity" id="choose-activity-label">Choose an activity:</label><br/>
-								<select name="selected" id="choose-activity" value={this.state.selected} onChange={this.handleChange}>
+								<select required name="selected" id="choose-activity" value={this.state.activity} onChange={this.handleChange}>
 									<option value={'null'}>Select an Activity</option>
 									{this.getActivities()}
 								</select>
 								<br/><br/>
 								<label for="name" id="name-label">Activity Name:</label><br/>
-								<input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange}/>
+								<input required type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange}/>
 								<br/><br/>
 								<label for="id" id="id-label">Activity ID:</label><br/>
-								<input type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
+								<input required type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
 								<br/><br/>
 								<label for="notes" id="notes-label">Activity Notes</label><br/>
 								<textarea name="notes" id="notes" value={this.state.notes} onChange={this.handleChange}/>
 								<br/><br/>
 								<label for="unit" id="unit-label">Activity Unit</label><br/>
-								<select name="unit" value={this.state.unit} onChange={this.handleChange}>
+								<select required name="unit" value={this.state.unit} onChange={this.handleChange}>
 									<option value="null">Select a Unit</option>
 									{this.getUnits()}
 								</select>

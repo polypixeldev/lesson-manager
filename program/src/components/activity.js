@@ -17,6 +17,7 @@ class Standard extends Component {
 	}
 
 	render(){
+		console.log(this.props.match.params.id);
 		return(
 			<main>
 				<h2>Activity - {this.props.match.params.id}</h2>

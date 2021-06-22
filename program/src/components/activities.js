@@ -24,8 +24,8 @@ class Activities extends Component {
 					<Route path="/activities/new" render={(props) => 
 						<NewActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>
 					}/>
-					<Route path="/activities/edit" render={(props) => <EditActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
-					<Route path="/activities/delete" render={(props) => <DeleteActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
+					<Route path="/activities/edit/:id" render={(props) => <EditActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
+					<Route path="/activities/delete/:id" render={(props) => <DeleteActivity {...props} dataObj={this.props.dataObj} refreshData={this.props.refreshData}/>}/>
 					<Route path="/activities/list">
 						<ActivityList dataObj={this.props.dataObj}/>
 					</Route>

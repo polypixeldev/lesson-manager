@@ -9,7 +9,7 @@ class EditStandard extends Component {
 		this.state = {
 			desc: null,
 			id: null,
-			standard: ""
+			standard: null
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -28,11 +28,15 @@ class EditStandard extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		window.api.send('edit-standard', [this.state.selected, [this.state.desc, this.state.id]]);
+		window.api.send('edit-standard', {
+			desc: this.state.desc,
+			id: this.state.id,
+			standard: this.state.standard
+		});
 		this.setState({
 			desc: '',
 			id: '',
-			selected: ''
+			standard: ''
 		});
 		this.props.refreshData();
 	}
@@ -42,7 +46,7 @@ class EditStandard extends Component {
 			this.setState({
 				desc: this.props.dataObj[0][this.props.match.params.id],
 				id: this.props.match.params.id,
-				selected: this.props.match.params.id
+				standard: this.props.match.params.id
 			});
 		}
 	}
@@ -65,13 +69,16 @@ class EditStandard extends Component {
 		<Route path="/standards/edit/selectstandard" render={(props) => 
 			<StandardSelector from="editstandard" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
 		}/>
-		<Route path="/standard/edit">
+		<Route path="/standards/edit/selectposition" render={(props) => 
+			<StandardSelector from="selectposition" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
+		}/>
+		<Route path="/standards/edit">
 		
 			<main>
 				<h2 id="Title">Edit Standard: </h2>
 				<form id="newStandard" onSubmit={this.handleSubmit}>
 					<Link to="/standards/edit/selectstandard">Select a Standard</Link><br/>
-					<p>Selected Standard: </p>
+					<p>Selected Standard: {this.state.standard}</p>
 					<br/><br/>
 					<label for="name" id="name-label">Standard Description:</label><br/>
 					<input type="text" id="name" name="desc" value={this.state.desc} onChange={this.handleChange}/>

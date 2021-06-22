@@ -16,7 +16,7 @@ class StandardLevel extends Component {
 	}
 
 	render(){
-		if(this.state.standard === true && this.props.from !== 'editstandard'){
+		if(this.state.standard === true){
 			return(
 				<>
 					<input type="submit"/>
@@ -54,29 +54,32 @@ class StandardSelector extends Component {
 		console.log(position);
 		if(position === 'top'){
 			return Object.entries(this.props.dataObj[0]).map(function(currentStandard, i){
-				return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard.desc}</option>
+				const currentArr = currentStandard[0].split('.');
+				if(currentArr.length !== 1) return '';
+				return <option value={currentArr[currentArr.length - 1]}>{currentStandard[0]}: {currentStandard[1]}</option>
 		});
 		}
 		let posObj = this.props.dataObj[0];
-		for(let index of position){
-			posObj = posObj[index];
-			console.log(index);
-		}
-		if(posObj.standard === true){
+		let match = [];
+	
+			for(let standard in posObj){
+				const standardArr = standard.split('.');
+				if(standard.startsWith(position.join('.')) && standardArr.length === (position.length + 1)){
+					match.push(standard);
+				}
+			}
+		
+		if(match.length === 0){
 			return isStandard();
 		}
+
 		let func = function(currentStandard, i){
-			if(currentStandard[0] === 'desc'){
-				return '';
-			}
-			if(currentStandard[0] === 'standard'){
-				return '';
-			}
-			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].desc}</option>
+			const currentArr = currentStandard.split('.');
+			return <option value={currentArr[currentArr.length - 1]}>{currentStandard}: {posObj[currentStandard]}</option>
 		}
 		func = func.bind(this);
 
-		return Object.entries(posObj).map(func);
+		return match.map(func);
 	}
 
 	renderLevels(){
@@ -132,11 +135,8 @@ class StandardSelector extends Component {
 			} else if(this.props.from === 'newactivity'){
 				return <Redirect to="/activities/new"/>
 			} else if(this.props.from === 'editstandard'){
-				return <Redirect to="/standards/edit"/>
+				return <Redirect to="/standards/edit/null"/>
 			}
-		}
-		if(this.props.from === 'editstandard'){
-			return <input type="submit"/>
 		}
 	}
 

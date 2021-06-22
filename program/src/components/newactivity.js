@@ -42,13 +42,16 @@ class NewActivity extends Component {
 
 	handleSubmit(event){
 		event.preventDefault()
-		window.api.sendSync('new-activity', {
+		let res = window.api.sendSync('new-activity', {
 			name: this.state.name,
 			id: this.state.id,
 			notes: this.state.notes,
 			unit: this.state.unit,
 			standards: this.state.standards
 		});
+		if(res === 'fail-unit'){
+			alert('Please specify a unit for the activity');
+		}
 		this.props.refreshData();
 	}
 
@@ -85,10 +88,10 @@ class NewActivity extends Component {
 						<h2 id="Title">New Activity: </h2>
 							<form onSubmit={this.handleSubmit} id="newActivity">
 								<label for="name" id="name-label">Activity Name:</label><br/>
-								<input type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange}/>
+								<input required type="text" id="name" name="name" value={this.state.name} onChange={this.handleChange}/>
 								<br/><br/>
 								<label for="id" id="id-label">Activity ID:</label><br/>
-								<input type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
+								<input required type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>
 								<br/><br/>
 								<label for="notes" id="notes-label">Activity Notes</label><br/>
 								<textarea name="notes" id="notes" value={this.state.notes} onChange={this.handleChange}/>

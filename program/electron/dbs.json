@@ -1,50 +1,22 @@
 [
   {
-    "I": {
-      "A": {
-        "a": {
-          "I.A.a.1": "Engages in physical activities with increasing balance, coordination, endurance and intensity"
-        }
-      }
-    },
-    "II": {
-      "standard": false,
-      "desc": "Two",
-      "A": {
-        "standard": false,
-        "desc": "two-sub-one",
-        "a": {
-          "1": {
-            "desc": "a standard",
-            "standard": true
-          },
-          "standard": false,
-          "desc": "two-sub-one-sub-one"
-        }
-      }
-    },
-    "III": {},
-    "IV": {},
-    "V": {},
-    "VI": {},
-    "VII": {},
-    "VIII": {}
+    "1": "hi",
+    "2": "ok",
+    "1.A": "bye",
+    "1.A.a": "hi again",
+    "1.A.a.1": "desc",
+    "1.A.a.1.b": "z",
+    "2.B": "b",
+    "2.B.b": "3",
+    "2.B.b.3": "yayayayyy"
   },
   {
-    "id": {
-      "name": "name",
-      "notes": "nope",
+    "Uncool id": {
+      "name": "A very cool name!",
+      "notes": "nootes",
       "unit": "unit_number",
       "standards": [
-        "II.A.a.1"
-      ]
-    },
-    "new id": {
-      "name": "new name",
-      "notes": "new notes",
-      "unit": "unit_number",
-      "standards": [
-        "II.A.a.1"
+        "1.A.a.1.b"
       ]
     }
   },
