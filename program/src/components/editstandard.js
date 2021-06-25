@@ -58,9 +58,12 @@ class EditStandard extends Component {
 		}
 		oldStandard = id;
 		this.setState({
-			standard: oldStandard
+			standard: oldStandard,
+			desc: this.props.dataObj[0][oldStandard],
+			id: oldStandard
 		});
 		console.log(this.state.standard);
+
 	}
 
 	render(){
@@ -81,7 +84,7 @@ class EditStandard extends Component {
 					<p>Selected Standard: {this.state.standard}</p>
 					<br/><br/>
 					<label for="name" id="name-label">Standard Description:</label><br/>
-					<input type="text" id="name" name="desc" value={this.state.desc} onChange={this.handleChange}/>
+					<textarea id="name" name="desc" value={this.state.desc} onChange={this.handleChange}/>
 					<br/><br/>
 					<label for="id" id="id-label">Standard ID:</label><br/>
 					<input type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange} />

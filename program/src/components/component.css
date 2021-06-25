@@ -8,6 +8,7 @@
 	align-items: center;
 	position: sticky;
 	top: 45px;
+	z-index: 1;
 }
 
 main {
@@ -105,3 +106,19 @@ button {
 	background-color: red;
 }
 
+#view-checkboxes {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+table {
+	border-collapse: fixed;
+	table-layout: fixed;
+	width: 100vw;
+}
+
+table td {
+	word-wrap: break-word;
+  }

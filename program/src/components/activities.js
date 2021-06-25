@@ -16,8 +16,8 @@ class Activities extends Component {
 				<nav id="sub-nav">
 					<NavLink className="sub-nav-link" to="/activities/new">New Activity</NavLink>
 					<NavLink className="sub-nav-link" to="/activities/list">Activity List</NavLink>
-					<NavLink className="sub-nav-link" to="/activities/edit">Edit Activity</NavLink>
-					<NavLink className="sub-nav-link" to="/activities/delete">Delete Activity</NavLink>
+					<NavLink className="sub-nav-link" to="/activities/edit/null">Edit Activity</NavLink>
+					<NavLink className="sub-nav-link" to="/activities/delete/null">Delete Activity</NavLink>
 				</nav>
 
 				<Switch>

@@ -2,7 +2,6 @@ const Electron = require('electron');
 //const isDev = require('electron-is-dev');   
 //const path = require('path');
 const fs = require('fs');
-const { addAbortSignal } = require('stream');
  
 let mainWindow;
  
@@ -23,12 +22,13 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
+    
     mainWindow.webContents.on('did-fail-load', () => {
         console.log('did-fail-load');
         mainWindow.loadFile('./electron/build/index.html');
         // REDIRECT TO FIRST WEBPAGE AGAIN
           });
-
+    
 	mainWindow.setMenuBarVisibility(false);
 }
 Electron.app.on('ready', createWindow);
@@ -87,17 +87,12 @@ Electron.ipcMain.on('edit-activity', (ev, arg) => {
                 ev.returnValue = 'fail-activity';
                 return;
             }
-            if(field === 'unit'){
-                ev.returnValue = 'fail-unit';
-                return;
-            }
         }
     }
     delete dataObj[1][arg.activity];
     dataObj[1][arg.id] = {
         name: arg.name,
         notes: arg.notes,
-        unit: arg.unit,
         standards: arg.standards
     }
     fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
@@ -107,15 +102,14 @@ Electron.ipcMain.on('edit-activity', (ev, arg) => {
 
 Electron.ipcMain.on('new-activity', (ev, arg) => {
     for(let field in arg){
-        if(field === null || field === ''){
-            
+        if(arg[field] === null || arg[field] === ''){
+            return;
         }
     }
     let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
     dataObj[1][arg.id] = {
         name: arg.name,
         notes: arg.notes,
-        unit: arg.unit,
         standards: arg.standards
     }
     fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
@@ -129,5 +123,43 @@ Electron.ipcMain.on('delete-activity', (ev, arg) => {
     delete dataObj[1][arg];
     fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('activity deleted');
+    ev.returnValue = 'done';
+});
+
+Electron.ipcMain.on('new-unit', (ev, arg) => {
+    for(let field in arg){
+        if(arg[field] === null || arg[field] === ''){
+            return;
+        }
+    }
+    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    console.log(arg);
+    dataObj[2][arg.name] = arg.weeks;
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('unit created');
+    ev.returnValue = 'done';
+});
+
+Electron.ipcMain.on('edit-unit', (ev, arg) => {
+    for(let field in arg){
+        if(arg[field] === null || arg[field] === ''){
+            return;
+        }
+    }
+    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    console.log(arg);
+    delete dataObj[2][arg.unit]
+    dataObj[2][arg.name] = arg.weeks;
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('unit edited');
+    ev.returnValue = 'done';
+});
+
+Electron.ipcMain.on('delete-unit', (ev, arg) => {
+    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    console.log(arg);
+    delete dataObj[2][arg];
+    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    console.log('unit deleted');
     ev.returnValue = 'done';
 })

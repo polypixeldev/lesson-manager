@@ -13,7 +13,7 @@ class StandardItem extends Component {
 	render(){
 		return (
 			<div id="item">
-				<button onClick={this.removeStandard}>X</button><br/>
+				<button type="button" onClick={this.removeStandard}>X</button><br/>
 				<p> {this.props.currentStandard}</p>
 			</div>
 		)

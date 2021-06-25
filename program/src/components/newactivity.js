@@ -11,20 +11,12 @@ class NewActivity extends Component {
 			name: null,
 			id: null,
 			notes: null,
-			unit: null,
 			standards: null
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.getUnits = this.getUnits.bind(this);
 		this.getSelectedStandard = this.getSelectedStandard.bind(this);
 		this.removeStandard = this.removeStandard.bind(this);
-	}
-
-	getUnits(){
-		return Object.entries(this.props.dataObj[2]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
-		});
 	}
 
 	handleChange(event){
@@ -42,16 +34,18 @@ class NewActivity extends Component {
 
 	handleSubmit(event){
 		event.preventDefault()
-		let res = window.api.sendSync('new-activity', {
+		window.api.sendSync('new-activity', {
 			name: this.state.name,
 			id: this.state.id,
 			notes: this.state.notes,
-			unit: this.state.unit,
 			standards: this.state.standards
 		});
-		if(res === 'fail-unit'){
-			alert('Please specify a unit for the activity');
-		}
+		this.setState({
+			name: '',
+			id: '',
+			notes: '',
+			standards: []
+		})
 		this.props.refreshData();
 	}
 
@@ -95,12 +89,6 @@ class NewActivity extends Component {
 								<br/><br/>
 								<label for="notes" id="notes-label">Activity Notes</label><br/>
 								<textarea name="notes" id="notes" value={this.state.notes} onChange={this.handleChange}/>
-								<br/><br/>
-								<label for="unit" id="unit-label">Activity Unit</label><br/>
-								<select name="unit" value={this.state.unit} onChange={this.handleChange}>
-									<option value="null">Select a Unit</option>
-									{this.getUnits()}
-								</select>
 								<br/><br/>
 								<Link to="/activities/new/selectstandard">Add a Standard</Link><br/>
 								<DisplayStandards removeStandard={this.removeStandard} standards={this.state.standards}/><br/>

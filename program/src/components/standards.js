@@ -17,7 +17,7 @@ class Standards extends Component {
 					<NavLink className="sub-nav-link" to="/standards/new">New Standard</NavLink>
 					<NavLink className="sub-nav-link" to="/standards/list">Standard List</NavLink>
 					<NavLink className="sub-nav-link" to="/standards/edit/null">Edit Standard</NavLink>
-					<NavLink className="sub-nav-link" to="/standards/delete">Delete Standard</NavLink>
+					<NavLink className="sub-nav-link" to="/standards/delete/null">Delete Standard</NavLink>
 				</nav>
 				<Switch>
 					<Route path="/standards/new">

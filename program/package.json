@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "ebuild": "node_modules/.bin/build",
-    "dev": "electron ."
+    "dev": "electron .",
+    "tracewarnings": "electron --trace-warnings"
   },
   "eslintConfig": {
     "extends": [

@@ -24,8 +24,6 @@ class Standard extends Component {
 				<hr/>
 				<h3>Activity Name:</h3>
 				<p>{this.props.dataObj[1][this.props.match.params.id].name}</p>
-				<h3>Activity Unit</h3>
-				<p>{this.props.dataObj[1][this.props.match.params.id].unit}</p>
 				<h3>Activity Notes:</h3>
 				<p>{this.props.dataObj[1][this.props.match.params.id].notes}</p>
 				<h3>Activity Standards:</h3>

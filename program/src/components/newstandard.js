@@ -40,7 +40,7 @@ class NewStandard extends Component {
 				<h2 id="Title">New Standard: </h2>
 				<form id="newStandard" onSubmit={this.handleSubmit}>
 					<label for="desc" id="desc-label">Standard Description:</label><br/>
-					<input type="text" id="desc" name="desc" value={this.state.desc} onChange={this.handleChange}/>
+					<textarea id="desc" name="desc" value={this.state.desc} onChange={this.handleChange}/>
 					<br/><br/>
 					<label for="id" id="id-label">Standard ID:</label><br/>
 					<input type="text" id="id" name="id" value={this.state.id} onChange={this.handleChange}/>

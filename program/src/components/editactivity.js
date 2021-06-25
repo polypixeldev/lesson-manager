@@ -12,13 +12,11 @@ class EditActivity extends Component {
 			name: null,
 			id: null,
 			notes: null,
-			unit: null,
 			standards: null
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.getActivities = this.getActivities.bind(this);
-		this.getUnits = this.getUnits.bind(this);
 		this.getSelectedStandard = this.getSelectedStandard.bind(this);
 		this.removeStandard = this.removeStandard.bind(this);
 	}
@@ -26,12 +24,6 @@ class EditActivity extends Component {
 	getActivities(){
 		return Object.entries(this.props.dataObj[1]).map(function(currentStandard, i){
 			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].name}</option>
-		});
-	}
-
-	getUnits(){
-		return Object.entries(this.props.dataObj[2]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
 		});
 	}
 
@@ -46,6 +38,14 @@ class EditActivity extends Component {
 		this.setState({
 			[name]: value
 		});
+		if(name === 'selected'){
+			this.setState({
+				name: this.props.dataObj[1][value].name,
+				id: value,
+				notes: this.props.dataObj[1][value].notes,
+				standards: this.props.dataObj[1][value].standards
+			})
+		}
 	}
 
 	handleSubmit(event){
@@ -55,15 +55,18 @@ class EditActivity extends Component {
 			name: this.state.name,
 			id: this.state.id,
 			notes: this.state.notes,
-			unit: this.state.unit,
 			standards: this.state.standards
 		});
 		if(res === 'fail-activity'){
 			return alert('Please select an activity to edit');
 		}
-		if(res === 'fail-unit'){
-			return alert('Please specify a unit for the activity');
-		}
+		this.setState({
+			activity: 'null',
+			name: '',
+			id: '',
+			notes: '',
+			standards: []
+		});
 		this.props.refreshData();
 	}
 
@@ -97,7 +100,6 @@ class EditActivity extends Component {
 				name: this.props.dataObj[1][this.props.match.params.id].name,
 				id: this.props.match.params.id,
 				notes: this.props.dataObj[1][this.props.match.params.id].notes,
-				unit: this.props.dataObj[1][this.props.match.params.id].unit,
 				standards: this.props.dataObj[1][this.props.match.params.id].standards
 			});
 		}
@@ -127,12 +129,6 @@ class EditActivity extends Component {
 								<br/><br/>
 								<label for="notes" id="notes-label">Activity Notes</label><br/>
 								<textarea name="notes" id="notes" value={this.state.notes} onChange={this.handleChange}/>
-								<br/><br/>
-								<label for="unit" id="unit-label">Activity Unit</label><br/>
-								<select required name="unit" value={this.state.unit} onChange={this.handleChange}>
-									<option value="null">Select a Unit</option>
-									{this.getUnits()}
-								</select>
 								<br/><br/>
 								<Link to="/activities/edit/selectstandard">Add a Standard</Link><br/>
 								<DisplayStandards removeStandard={this.removeStandard} standards={this.state.standards}/><br/>

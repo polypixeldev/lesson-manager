@@ -19,7 +19,7 @@ class StandardLevel extends Component {
 		if(this.state.standard === true){
 			return(
 				<>
-					<input type="submit"/>
+					
 				</>
 			)
 		} else {
@@ -145,6 +145,7 @@ class StandardSelector extends Component {
 			<main>
 				<form onSubmit={this.handleSubmit}>
 					{this.renderLevels()}
+					<input type="submit"/>
 				</form><br/>
 				{this.submitted()}
 				<Link to="/activities/edit">Back</Link>
