@@ -7,7 +7,9 @@
     "1.A.a.1": "desc",
     "1.A.a.1.b": "z",
     "2.B": "b",
-    "2.B.b": "3"
+    "2.B.b": "3",
+    "III": "aaa",
+    "III.A": "aaa"
   },
   {
     "Uncool id": {
@@ -26,10 +28,11 @@
       ]
     },
     "id": {
-      "name": "na",
-      "notes": "no",
+      "name": "name",
+      "notes": "notes",
       "standards": [
-        "2"
+        "1.A",
+        "III.A"
       ]
     }
   },
@@ -39,6 +42,15 @@
         "Uncool id",
         "unit 1"
       ]
+    ],
+    "Unit 1": [
+      [
+        "id"
+      ],
+      [
+        "unit 1"
+      ],
+      []
     ]
   }
 ]

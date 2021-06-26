@@ -32,6 +32,7 @@ class App extends Component{
   refreshData(){
     console.log('h');
     this.setState({dataObj: window.api.sendSync('data', '')});
+    console.log(this.state.dataObj);
   }
 
   render(){
@@ -46,7 +47,7 @@ class App extends Component{
           <nav>
             <NavLink className="navlink" to="/standards/list">Standards</NavLink>
             <NavLink className="navlink" to="/activities/list">Activities</NavLink>
-            <NavLink className="navlink" to="/units/report">Units</NavLink>
+            <NavLink className="navlink" to="/units/report/null">Units</NavLink>
           </nav>
         </header>
         <Switch>

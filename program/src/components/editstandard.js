@@ -72,9 +72,6 @@ class EditStandard extends Component {
 		<Route path="/standards/edit/selectstandard" render={(props) => 
 			<StandardSelector from="editstandard" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
 		}/>
-		<Route path="/standards/edit/selectposition" render={(props) => 
-			<StandardSelector from="selectposition" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
-		}/>
 		<Route path="/standards/edit">
 		
 			<main>

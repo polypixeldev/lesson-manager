@@ -13,6 +13,8 @@ class ActivityRow extends Component {
 					return <td>{this.props.week}</td>
 				} else if(currentView[0] === 'id'){
 					return <td>{this.props.currentActivity}</td>
+				} else if(currentView[0] === 'standards'){
+					return <td>{this.props.dataObj[1][this.props.currentActivity].standards.join(', ')}</td>
 				} else {
 					return <td>{this.props.dataObj[1][this.props.currentActivity][currentView[0]]}</td>
 				}

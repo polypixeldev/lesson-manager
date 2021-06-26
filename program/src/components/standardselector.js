@@ -136,6 +136,8 @@ class StandardSelector extends Component {
 				return <Redirect to="/activities/new"/>
 			} else if(this.props.from === 'editstandard'){
 				return <Redirect to="/standards/edit/null"/>
+			} else if(this.props.from === 'deletestandard'){
+				return <Redirect to="/standards/delete/null"/>
 			}
 		}
 	}

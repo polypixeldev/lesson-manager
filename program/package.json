@@ -1,19 +1,17 @@
 {
-  "name": "program",
-  "version": "0.1.0",
+  "name": "lesson-manager",
+  "version": "1.0.0",
+  "author": "Samuel Fernandez",
+  "description": "A program to help manage lessons and their standards",
   "private": true,
   "homepage": "./",
-  "main": "./electron/main.js",
+  "main": "./build/electron.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.1",
     "concurrently": "^6.2.0",
-    "cors": "^2.8.5",
-    "electron": "^13.1.2",
-    "electron-builder": "^22.11.7",
-    "electron-is-dev": "^2.0.0",
     "fs": "0.0.1-security",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,9 +25,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ebuild": "node_modules/.bin/build",
+    "ebuild": "electron-builder build -w",
     "dev": "electron .",
-    "tracewarnings": "electron --trace-warnings"
+    "tracewarnings": "electron --trace-warnings",
+    "electron-pack": "electron-builder -w"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +47,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "build": {
+    "appId": "com.fernandez.lessonmanager",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win":{
+      "extraFiles": "build/dbs.json",
+      "target": "nsis"
+    }
+  },
+  "devDependencies": {
+    "electron": "^13.1.2",
+    "electron-builder": "^22.11.7",
+    "electron-is-dev": "^2.0.0"
   }
 }

@@ -6,7 +6,7 @@ class Unit extends Component {
 	render(){
 		return(
 			<main>
-				<p><em>Note: You can see a more detailed table of this unit at the <Link to={`/units/report/full/${this.props.match.params.id}`}>Full Unit Report</Link></em></p>
+				<p><em>Note: You can see a more detailed table of this unit at the <Link to={`/units/report/${this.props.match.params.id}`}>Full Unit Report</Link></em></p>
 				<h2>Unit - {this.props.match.params.id}</h2>
 				<hr/>
 				<h3>Number of Weeks:</h3>

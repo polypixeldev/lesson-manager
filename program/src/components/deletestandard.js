@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+
+import StandardSelector from './standardselector.js';
 
 import './component.css';
 
@@ -10,12 +13,7 @@ class DeleteStandard extends Component {
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
-
-	getStandards(){
-		return Object.entries(this.props.dataObj[0]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}</option>
-		});
+		this.getSelectedStandard = this.getSelectedStandard.bind(this);
 	}
 
 	handleChange(event){
@@ -42,20 +40,37 @@ class DeleteStandard extends Component {
 		}
 	}
 
+	getSelectedStandard(id){
+		let oldStandard = this.state.selected;
+		if(oldStandard === null){
+			oldStandard = "";
+		}
+		oldStandard = id;
+		this.setState({
+			selected: oldStandard
+		});
+
+	}
+
 	render(){
 		return(
-			<main>
-				<h2>Delete Standard:</h2>
-				<form onSubmit={this.handleSubmit}>
-					<label for="select-standard" id="select-standard-label">Select Standard:</label><br/>
-					<select id="select-standard" name="selected" value={this.state.selected} onChange={this.handleChange}>
-						{this.getStandards()}
-					</select>
-					<br/><br/>
-					<label for="delete-submit" id="delete-submit-label">Are you sure you want to delete this standrad? It will be removed from it's associated activities - <strong>this action is not reversible.</strong></label><br/>
-					<input type="submit" id="delete-submit" name="delete-submit"/>
-				</form>
-			</main>
+			<Switch>
+				<Route path="/standards/delete/selectstandard" render={(props) => 
+					<StandardSelector from="deletestandard" dataObj={this.props.dataObj} getSelectedStandard={this.getSelectedStandard}/>
+				}/>
+				<Route path="/standards/delete">
+					<main>
+						<h2>Delete Standard:</h2>
+						<form onSubmit={this.handleSubmit}>
+							<Link to="/standards/delete/selectstandard">Select a Standard</Link><br/>
+							<p>Selected Standard: {this.state.selected}</p>
+							<br/><br/>
+							<label for="delete-submit" id="delete-submit-label">Are you sure you want to delete this standrad? It will be removed from it's associated activities - <strong>this action is not reversible.</strong></label><br/>
+							<input type="submit" id="delete-submit" name="delete-submit"/>
+						</form>
+					</main>
+				</Route>
+			</Switch>
 		)
 	}
 }

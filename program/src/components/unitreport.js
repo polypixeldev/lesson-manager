@@ -48,6 +48,15 @@ class UnitReport extends Component {
 		}
 	}
 
+	componentDidMount(){
+		console.log(this.props.match.params.id);
+		if(this.props.match.params.id !== 'null'){
+			this.setState({
+				unit: this.props.match.params.id
+			})
+		}
+	}
+
 	render(){
 		return(
 			<main>
