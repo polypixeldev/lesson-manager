@@ -48,6 +48,7 @@ class StandardSelector extends Component {
 		this.renderLevels = this.renderLevels.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleBack = this.handleBack.bind(this);
 	}
 
 	getStandards(position, isStandard){
@@ -146,6 +147,12 @@ class StandardSelector extends Component {
 		}
 	}
 
+	handleBack(){
+		this.setState({
+			submitted: true
+		});
+	}
+
 	render(){
 		return(
 			<main>
@@ -154,7 +161,7 @@ class StandardSelector extends Component {
 					<input type="submit"/>
 				</form><br/>
 				{this.submitted()}
-				<Link to="/activities/edit">Back</Link>
+				<Link onClick={this.handleBack}>Back</Link>
 			</main>
 		)
 	}

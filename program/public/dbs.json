@@ -1,56 +1,11 @@
 [
   {
-    "1": "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
-    "2": "ok",
-    "1.A": "bye",
-    "1.A.a": "hi again",
-    "1.A.a.1": "desc",
-    "1.A.a.1.b": "z",
-    "2.B": "b",
-    "2.B.b": "3",
-    "III": "aaa",
-    "III.A": "aaa"
+
   },
   {
-    "Uncool id": {
-      "name": "A very cool name!",
-      "notes": "nootes",
-      "unit": "unit_number",
-      "standards": [
-        "1.A.a.1.b"
-      ]
-    },
-    "unit 1": {
-      "name": "1",
-      "notes": "nootes",
-      "standards": [
-        "1.A"
-      ]
-    },
-    "id": {
-      "name": "name",
-      "notes": "notes",
-      "standards": [
-        "1.A",
-        "III.A"
-      ]
-    }
+
   },
   {
-    "Unit 2": [
-      [
-        "Uncool id",
-        "unit 1"
-      ]
-    ],
-    "Unit 1": [
-      [
-        "id"
-      ],
-      [
-        "unit 1"
-      ],
-      []
-    ]
+
   }
 ]

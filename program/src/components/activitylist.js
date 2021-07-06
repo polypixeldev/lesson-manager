@@ -19,8 +19,9 @@ class ActivityRow extends Component{
 
 class ActivityList extends Component {
 	list(){
-		return Object.entries(this.props.dataObj[1]).map(function(currentActivity, i){
-			return <ActivityRow id={currentActivity[0]} name={currentActivity[1].name} />
+		const sortArr = Object.entries(this.props.dataObj[1]).sort();
+		return sortArr.map(function(currentActivity, i){
+			return <ActivityRow name={currentActivity[0]} id={currentActivity[1].id} />
 		});
 	}
 

@@ -44,6 +44,7 @@ Electron.ipcMain.on('data', (ev, arg) => {
 Electron.ipcMain.on('new-standard', (ev, arg) => {
     for(let field of arg){
         if(field === null || field === ''){
+            ev.returnValue = 'fail';
             return;
         }
     }
@@ -66,6 +67,7 @@ Electron.ipcMain.on('new-standard', (ev, arg) => {
 Electron.ipcMain.on('edit-standard', (ev, arg) => {
     for(let field in arg){
         if(field === null || field === ''){
+            ev.returnValue = 'fail';
             return;
         }
     }
@@ -79,6 +81,7 @@ Electron.ipcMain.on('edit-standard', (ev, arg) => {
 
 Electron.ipcMain.on('delete-standard', (ev, arg) => {
         if(arg === null || arg === ''){
+            ev.returnValue = 'fail';
             return;
         }
     const dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
@@ -100,8 +103,8 @@ Electron.ipcMain.on('edit-activity', (ev, arg) => {
         }
     }
     delete dataObj[1][arg.activity];
-    dataObj[1][arg.id] = {
-        name: arg.name,
+    dataObj[1][arg.name] = {
+        name: arg.id,
         notes: arg.notes,
         standards: arg.standards
     }
@@ -113,12 +116,13 @@ Electron.ipcMain.on('edit-activity', (ev, arg) => {
 Electron.ipcMain.on('new-activity', (ev, arg) => {
     for(let field in arg){
         if(arg[field] === null || arg[field] === ''){
+            ev.returnValue = 'fail';
             return;
         }
     }
     let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
-    dataObj[1][arg.id] = {
-        name: arg.name,
+    dataObj[1][arg.name] = {
+        id: arg.id,
         notes: arg.notes,
         standards: arg.standards
     }
@@ -139,6 +143,7 @@ Electron.ipcMain.on('delete-activity', (ev, arg) => {
 Electron.ipcMain.on('new-unit', (ev, arg) => {
     for(let field in arg){
         if(arg[field] === null || arg[field] === ''){
+            ev.returnValue = 'fail';
             return;
         }
     }
@@ -153,6 +158,7 @@ Electron.ipcMain.on('new-unit', (ev, arg) => {
 Electron.ipcMain.on('edit-unit', (ev, arg) => {
     for(let field in arg){
         if(arg[field] === null || arg[field] === ''){
+            ev.returnValue = 'fail';
             return;
         }
     }

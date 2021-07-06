@@ -33,7 +33,7 @@ class NewActivity extends Component {
 	}
 
 	handleSubmit(event){
-		event.preventDefault()
+		event.preventDefault();
 		window.api.sendSync('new-activity', {
 			name: this.state.name,
 			id: this.state.id,
