@@ -25,7 +25,7 @@ class NewStandard extends Component {
 
 	handleSubmit(event){
 		console.log(this.state.desc);
-		window.api.send('new-standard', [this.state.id, this.state.desc]);
+		window.api.sendSync('new-standard', [this.state.id, this.state.desc]);
 		this.setState({
 			desc: '',
 			id: ''

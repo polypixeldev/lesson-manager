@@ -28,7 +28,7 @@ class EditStandard extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		window.api.send('edit-standard', {
+		window.api.sendSync('edit-standard', {
 			desc: this.state.desc,
 			id: this.state.id,
 			standard: this.state.standard

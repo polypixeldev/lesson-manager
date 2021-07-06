@@ -25,7 +25,7 @@ function createWindow() {
     
     mainWindow.webContents.on('did-fail-load', () => {
         console.log('did-fail-load');
-        mainWindow.loadFile('./electron/build/index.html');
+        mainWindow.loadFile(__dirname + '/index.html');
         // REDIRECT TO FIRST WEBPAGE AGAIN
           });
     
@@ -48,6 +48,7 @@ Electron.ipcMain.on('new-standard', (ev, arg) => {
         }
     }
     const dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
+    /*
     let split = arg[0].split('.');
     for(let i=0; i<split.length; i++){
         if(i === split.length - 1){
@@ -55,9 +56,11 @@ Electron.ipcMain.on('new-standard', (ev, arg) => {
         }
         dataObj[0][split.slice(0, i)] = '';
     }
-    console.log(dataObj);
+    */
+   dataObj[0][arg[0]] = arg[1];
     fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('new standard added');
+    ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('edit-standard', (ev, arg) => {
@@ -82,6 +85,7 @@ Electron.ipcMain.on('delete-standard', (ev, arg) => {
     delete dataObj[0][arg];
     fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('standard deleted');
+    ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('edit-activity', (ev, arg) => {

@@ -28,7 +28,7 @@ class DeleteStandard extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-		window.api.send('delete-standard', this.state.selected);
+		window.api.sendSync('delete-standard', this.state.selected);
 		this.props.refreshData();
 	}
 

@@ -25,7 +25,7 @@ function createWindow() {
     
     mainWindow.webContents.on('did-fail-load', () => {
         console.log('did-fail-load');
-        mainWindow.loadFile('./electron/build/index.html');
+        mainWindow.loadFile(__dirname + '/index.html');
         // REDIRECT TO FIRST WEBPAGE AGAIN
           });
     
@@ -38,7 +38,7 @@ Electron.ipcMain.on('test', (ev, arg) => {
 });
 
 Electron.ipcMain.on('data', (ev, arg) => {
-    ev.returnValue = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    ev.returnValue = JSON.parse(fs.readFileSync('build/dbs.json'));
 });
 
 Electron.ipcMain.on('new-standard', (ev, arg) => {
@@ -47,7 +47,8 @@ Electron.ipcMain.on('new-standard', (ev, arg) => {
             return;
         }
     }
-    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    const dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
+    /*
     let split = arg[0].split('.');
     for(let i=0; i<split.length; i++){
         if(i === split.length - 1){
@@ -55,9 +56,11 @@ Electron.ipcMain.on('new-standard', (ev, arg) => {
         }
         dataObj[0][split.slice(0, i)] = '';
     }
-    console.log(dataObj);
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    */
+   dataObj[0][arg[0]] = arg[1];
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('new standard added');
+    ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('edit-standard', (ev, arg) => {
@@ -66,10 +69,10 @@ Electron.ipcMain.on('edit-standard', (ev, arg) => {
             return;
         }
     }
-    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    const dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     delete dataObj[0][arg.standard];
     dataObj[0][arg.id] = arg.desc;
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('standard edited');
     ev.returnValue = 'done';
 });
@@ -78,14 +81,15 @@ Electron.ipcMain.on('delete-standard', (ev, arg) => {
         if(arg === null || arg === ''){
             return;
         }
-    const dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    const dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     delete dataObj[0][arg];
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('standard deleted');
+    ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('edit-activity', (ev, arg) => {
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     console.log(arg);
     for(let field in arg){
         if(arg[field] === null || arg[field] === ''){
@@ -101,7 +105,7 @@ Electron.ipcMain.on('edit-activity', (ev, arg) => {
         notes: arg.notes,
         standards: arg.standards
     }
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('activity edited');
     ev.returnValue = 'done';
 });
@@ -112,22 +116,22 @@ Electron.ipcMain.on('new-activity', (ev, arg) => {
             return;
         }
     }
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     dataObj[1][arg.id] = {
         name: arg.name,
         notes: arg.notes,
         standards: arg.standards
     }
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('activity created');
     ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('delete-activity', (ev, arg) => {
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     console.log(arg);
     delete dataObj[1][arg];
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('activity deleted');
     ev.returnValue = 'done';
 });
@@ -138,10 +142,10 @@ Electron.ipcMain.on('new-unit', (ev, arg) => {
             return;
         }
     }
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     console.log(arg);
     dataObj[2][arg.name] = arg.weeks;
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('unit created');
     ev.returnValue = 'done';
 });
@@ -152,20 +156,20 @@ Electron.ipcMain.on('edit-unit', (ev, arg) => {
             return;
         }
     }
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     console.log(arg);
     delete dataObj[2][arg.unit]
     dataObj[2][arg.name] = arg.weeks;
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('unit edited');
     ev.returnValue = 'done';
 });
 
 Electron.ipcMain.on('delete-unit', (ev, arg) => {
-    let dataObj = JSON.parse(fs.readFileSync(__dirname + '/dbs.json'));
+    let dataObj = JSON.parse(fs.readFileSync('build/dbs.json'));
     console.log(arg);
     delete dataObj[2][arg];
-    fs.writeFileSync(__dirname + '/dbs.json', JSON.stringify(dataObj, null, 2));
+    fs.writeFileSync('build/dbs.json', JSON.stringify(dataObj, null, 2));
     console.log('unit deleted');
     ev.returnValue = 'done';
 })

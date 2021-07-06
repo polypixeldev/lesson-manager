@@ -64,9 +64,13 @@ class StandardSelector extends Component {
 	
 			for(let standard in posObj){
 				const standardArr = standard.split('.');
-				if(standard.startsWith(position.join('.')) && standardArr.length === (position.length + 1)){
-					match.push(standard);
-				}
+					
+				 	console.log(position.join('.') + '.');
+					if(standard.startsWith(position.join('.') + '.') && standardArr.length === (position.length + 1)){
+						
+						match.push(standard);
+					}
+				
 			}
 		
 		if(match.length === 0){
@@ -131,7 +135,7 @@ class StandardSelector extends Component {
 	submitted(){
 		if(this.state.submitted === true){
 			if(this.props.from === 'editactivity'){
-				return <Redirect to="/activities/edit"/>
+				return <Redirect to="/activities/edit/null"/>
 			} else if(this.props.from === 'newactivity'){
 				return <Redirect to="/activities/new"/>
 			} else if(this.props.from === 'editstandard'){
