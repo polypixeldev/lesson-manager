@@ -8,7 +8,7 @@ class EditActivity extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			selected: null,
+			activity: null,
 			name: null,
 			id: null,
 			notes: null,
@@ -38,7 +38,7 @@ class EditActivity extends Component {
 		this.setState({
 			[name]: value
 		});
-		if(name === 'selected'){
+		if(name === 'activity'){
 			this.setState({
 				name: value,
 				id: this.props.dataObj[1][value].id,
@@ -116,7 +116,7 @@ class EditActivity extends Component {
 						<h2 id="Title">Edit Activity: </h2>
 							<form onSubmit={this.handleSubmit} id="editActivity">
 								<label for="choose-activity" id="choose-activity-label">Choose an activity:</label><br/>
-								<select required name="selected" id="choose-activity" value={this.state.activity} onChange={this.handleChange}>
+								<select required name="activity" id="choose-activity" value={this.state.activity} onChange={this.handleChange}>
 									<option value={'null'}>Select an Activity</option>
 									{this.getActivities()}
 								</select>

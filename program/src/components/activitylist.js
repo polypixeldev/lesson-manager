@@ -10,7 +10,7 @@ class ActivityRow extends Component{
 				<td>{this.props.id}</td>
 				<td>{this.props.name}</td>
 				<td>
-					<Link to={"/activities/" + this.props.id}>More Info</Link>
+					<Link to={"/activities/" + this.props.name}>More Info</Link>
 				</td>
 			</tr>
 		);

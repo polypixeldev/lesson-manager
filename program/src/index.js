@@ -7,7 +7,7 @@ import {HashRouter} from 'react-router-dom';
 
 ReactDOM.render(
   <HashRouter>
-  <title>Lesson Manager v1.0.0</title>
+    <title>Lesson Manager v1.1.3</title>
     <App />
   </HashRouter>,
   document.getElementById('root')

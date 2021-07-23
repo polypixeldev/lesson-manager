@@ -29,7 +29,7 @@ class Activities extends Component {
 					<Route path="/activities/list">
 						<ActivityList dataObj={this.props.dataObj}/>
 					</Route>
-					<Route path="/activities/:id" render={(props) => <Activity {...props} dataObj={this.props.dataObj}/>}/>
+					<Route path="/activities/:name" render={(props) => <Activity {...props} dataObj={this.props.dataObj}/>}/>
 				</Switch>
 			</main>
 		)
