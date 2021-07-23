@@ -38,11 +38,11 @@ class App extends Component{
   render(){
     return (
       <div className="App">
-        <title>Lesson Manager v1.0.0</title>
+        <title>Lesson Manager v1.1.2</title>
         <header id="main-nav">
           <Link to="/" id="title">
             <h1>Lesson Manager</h1>
-            <p id="v">v1.0.0</p>
+            <p id="v">v1.1.2</p>
           </Link>
           <nav>
             <NavLink className="navlink" to="/standards/list">Standards</NavLink>

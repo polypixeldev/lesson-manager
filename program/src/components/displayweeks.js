@@ -16,7 +16,7 @@ class WeekItem extends Component {
 		return(
 			<div id="item">
 				<button type="button" onClick={this.removeWeek}>X</button>
-				<Link to={`/units/${this.props.from}/weeks/${this.props.i}`}>Week {this.props.i}</Link>
+				<Link to={`/units/${this.props.from}/weeks/${this.props.i}`}>Week {this.props.i + 1}</Link>
 			</div>
 		)
 	}

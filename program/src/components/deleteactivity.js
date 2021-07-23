@@ -15,7 +15,7 @@ class DeleteActivity extends Component {
 
 	getActivities(){
 		return Object.entries(this.props.dataObj[1]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].name}</option>
+			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].id}</option>
 		});
 	}
 

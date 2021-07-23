@@ -124,7 +124,7 @@ class Week extends Component {
 		console.log('uhohoh');
 		return(
 			<main>
-				<h2>{this.props.unitname} - Week {this.props.match.params.id}</h2>
+				<h2>{this.props.unitname} - Week {parseInt(this.props.match.params.id) + 1}</h2>
 				<hr/>
 				<h3>Activities:</h3>
 				{this.listActivities()}

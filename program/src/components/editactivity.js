@@ -23,7 +23,7 @@ class EditActivity extends Component {
 
 	getActivities(){
 		return Object.entries(this.props.dataObj[1]).map(function(currentStandard, i){
-			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].name}</option>
+			return <option value={currentStandard[0]}>{currentStandard[0]}: {currentStandard[1].id}</option>
 		});
 	}
 
@@ -40,8 +40,8 @@ class EditActivity extends Component {
 		});
 		if(name === 'selected'){
 			this.setState({
-				name: this.props.dataObj[1][value].name,
-				id: value,
+				name: value,
+				id: this.props.dataObj[1][value].id,
 				notes: this.props.dataObj[1][value].notes,
 				standards: this.props.dataObj[1][value].standards
 			})
@@ -97,8 +97,8 @@ class EditActivity extends Component {
 		if(this.props.match.params.id !== 'null'){
 			this.setState({
 				activity: this.props.match.params.id,
-				name: this.props.dataObj[1][this.props.match.params.id].name,
-				id: this.props.match.params.id,
+				name: this.props.match.params.id,
+				id: this.props.dataObj[1][this.props.match.params.id].id,
 				notes: this.props.dataObj[1][this.props.match.params.id].notes,
 				standards: this.props.dataObj[1][this.props.match.params.id].standards
 			});
